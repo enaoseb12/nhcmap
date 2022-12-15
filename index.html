@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>unesco demo01_SB</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+
+  <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    body {
+      padding: 1;
+      margin: 1;
+    }
+
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+    }
+
+    .lorem {
+      font-style: italic;
+      color: #AAA;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="sidebar" class="sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="sidebar-tabs">
+      <ul role="tablist">
+        <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+        <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+        <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+        <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+
+      <ul role="tablist">
+        <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+      </ul>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="sidebar-content">
+      <div class="sidebar-pane" id="home">
+        <h1 class="sidebar-header">
+          UNESCO Namibia Heritage Sites Map
+          <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+
+
+        <p><a href="https://www.nhc-nam.org/">Home</a></p>
+
+        <a href="">Twyfelfontein Virtual Map</a>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+          et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      </div>
+
+      <div class="sidebar-pane" id="profile">
+        <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+
+      <div class="sidebar-pane" id="messages">
+        <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+
+      <div class="sidebar-pane" id="settings">
+        <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+      </div>
+    </div>
+  </div>
+
+  <div id="map" class="sidebar-map"></div>
+
+
+
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+  <script src="js/leaflet-sidebar.js"></script>
+  <script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js?v1.3.0"></script>
+
+  <script>
+    var map = L.map("map", {
+      center: [-23.048, 17],
+      zoom: 6
+    });
+
+    var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; OpenStreetMap contributors'
+    });osm.addTo(map);
+
+
+    var siteIcon = L.icon({
+     iconUrl: 'data/circle.png',
+     iconSize: [15, 15],
+     iconAnchor: [7, 15],
+     popupAnchor: [0, -13]
+   });
+
+   var TwyFmarker = L.marker([-20.5975955, 14.3745058], {icon: siteIcon, title:"TwyfelFontein"}).addTo(map).bindPopup("<h3>TwyfelFontein</h3> <p>Twyfelfontein (Afrikaans: uncertain spring), officially known as ǀUi-ǁAis (Damara/Nama: jumping waterhole), is a site of ancient rock engravings in the Kunene Region of north-western Namibia.<a href='https://whc.unesco.org/en/list/1255' target=_blank'>Read more...</a></p> <img src='data/TF2.jpg '/>");
+
+   var NSDmarker = L.marker([-24.761815, 15.296955],{icon:siteIcon, title:"Namib Sand Dunes"}).addTo(map).bindPopup("<h3>Namib Sand Sea</h3><p>Namib Sand Sea is the only coastal desert in the world that includes extensive dune fields influenced by fog. Covering an area of over three million hectares and a buffer zone of 899,500 hectares.<a href='https://whc.unesco.org/en/list/1430' target=_blank'>Read more...</a></p><img src='data/NSD1.jpg '/> ");
+
+   // create thunderforest osm layer (not adding it to map)
+   var terrain = L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+     maxZoom: 19,
+     attribution: '&copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors, under an <a href="http://www.openstreetmap.org/copyright" title="ODbL">open license</a>. terrain style by <a href="http://stamen.com">Stamen Design</a>'
+   });
+
+   var UnescoSitesLayer = L.layerGroup([TwyFmarker, NSDmarker]);
+
+   var overlays = {
+     "UnescoSites":UnescoSitesLayer
+   };
+
+   // define basemap and add layer switcher control
+   var basemaps = {
+     "OSM": osm,
+     "Terrain": terrain
+   };
+
+   L.control.layers(basemaps, overlays).addTo(map);
+
+  /*  //create sites icons
+    var sitesIconTF = L.icon({
+      iconUrl:'data/circle_orn.png',
+      iconsize:[15,15]
+    });
+    var sitesIconNSD = L.icon({
+      iconUrl:'data/circle_grn.pgn',
+      iconsize:[15,15]
+    });*/
+
+
+    var sidebar = L.control.sidebar('sidebar').addTo(map);
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="js/index.js" charset="utf-8"></script>
+</body>
+
+</html>
